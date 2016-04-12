@@ -5,7 +5,10 @@ from django.core.urlresolvers import reverse
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-import datetime, stripe, arrow
+import datetime, stripe, arrow, json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from models import User
 
 
 stripe.api_key = settings.STRIPE_SECRET
@@ -20,8 +23,6 @@ def register(request):
         if form.is_valid():
             try:
                 customer = stripe.Customer.create(
-                    amount=499,
-                    currency="USD",
                     description=form.cleaned_data['email'],
                     card=form.cleaned_data['stripe_id'],
                     plan='REG_MONTHLY'
@@ -167,3 +168,5 @@ def subscriptions_webhook(request):
         return HttpResponse(status=404)
 
     return HttpResponse(status=200)
+
+

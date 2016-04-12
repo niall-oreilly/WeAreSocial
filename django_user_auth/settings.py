@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello',
     'accounts',
-    'django_forms_bootstrap'
+    'django_forms_bootstrap',
+    'paypal_store'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -136,3 +137,9 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET','sk_test_jxaS4R5kgFvTnEAD8kYDzNmL')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+#Paypal Settings
+SITE_URL = 'http://127.0.0.1:8000'
+PAYPAL_NOTIFY_URL = 'http://127.0.0.1:8000/a-very-hard-to-guess-url'
+PAYPAL_RECEIVER_EMAIL = 'nialloreilly123-facilitator@gmail.com'
