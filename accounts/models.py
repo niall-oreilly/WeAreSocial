@@ -31,4 +31,5 @@ class AccountUserManager(UserManager):
 
 class User(AbstractUser):
     stripe_id = models.CharField(max_length=40, default='')
+    subscription_end = models.DateTimeField(default=timezone.now())
     objects = AccountUserManager()
